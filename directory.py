@@ -15,17 +15,13 @@ def goDown(path, oldPath):
       if os.path.isdir(path+file):
          print("going down")
          goDown(path+file, path)
-      if(path != oldPath):
-       	 for file in os.listdir(path+file):
-            os.rename(path+file, oldPath+file)
    
-        
-
-        
-#def __main__():
-#    print("called main")
-#    collapse()
-
+   for file in os.listdir(path):
+      if(os.path.isdir(path+file)):
+         os.rmdir(path+file)
+      elif(path != oldPath):
+         os.rename(path+file, oldPath+file)
+   
 
 if __name__ == "__main__":
     print("main\n")
