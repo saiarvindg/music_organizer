@@ -1,15 +1,18 @@
 import os
+import mutagen
 from metadata import clear_meta, change_meta
-#, get_album, get_artist
 
 path = 'C:\\Users\\Solomon Kritz\\Desktop\\Wiz Khalifa'
 
+#ONLY WORKS IF M4A
 def get_album(path):
-   return 'ONIFC'
-    
-def get_artist(path):
-   return 'Wiz Khalifa'
+   audio = mutagen.File(path)
+   return(audio["\xa9ART"][0])
 
+#ONLY WORKS IF M4A
+def get_artist(path):
+   audio = mutagen.File(path)
+   return audio["\xa9alb"][0]
 
 def collapse():
    recreate(path, path)
@@ -43,7 +46,7 @@ def removeNonAudio(path):
 def dirEmpty(path):
    i = 0
    for file in os.listdir(path):
-      i++
+      i+=1
    if i == 0:
       return True
    else:
@@ -66,22 +69,21 @@ def recreate(path, root):
 def moveToCorrectLocation(filePath, root):
     dest = filePath
     #if artist already exists then we are joining the paths
-    print(os.path.join(root, get_artist(dest)))
-    if (os.path.exists(os.path.join(root, get_artist(dest)))):
-        dest = os.path.join(root, get_artist(dest))
+    if (os.path.exists(os.path.join(root, get_artist(filePath)))):
+        dest = os.path.join(root, get_artist(filePath))
     #if the artist does not exist then we are making the 
     #folders and joining the path 
     else:
-        dest = os.path.join(root, get_artist(dest))
+        dest = os.path.join(root, get_artist(filePath))
         os.mkdir(dest)
     
     #if the album already exists then we are just joining the paths
-    if (os.path.exists(os.path.join(dest, get_album(dest)))):
-        dest = os.path.join(dest, get_album(dest))
+    if (os.path.exists(os.path.join(dest, get_album(filePath)))):
+        dest = os.path.join(dest, get_album(filePath))
     #if the album does not exist then we are creating the 
     #folders and joining the path
     else:
-        dest = os.path.join(dest, get_album(dest))
+        dest = os.path.join(dest, get_album(filePath))
         os.mkdir(dest)
         
     if (filePath != dest):
