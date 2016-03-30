@@ -1,6 +1,6 @@
 import os
 import mutagen
-#from metadata import clear_meta, change_meta
+from metadata import get_meta
 
 path = 'C:\\Users\\Solomon Kritz\\Desktop\\Music'
 
@@ -10,16 +10,24 @@ def get_album(path):
    print(audio.pprint())
    if ("mp4" in str(type(audio))):
       return audio["\xa9alb"][0]
-   if ("mp3" in str(type(audio))):
+   if ("mp3" in str(type(audio)) or "aiff" in str(type(audio)) or "trueaudio" in str(type(audio))):
       return audio["album"][0]
-
+   if ("wavpack" in str(type(audio)) or "musepack" in str(type(audio)) or "apev2" in str(type(audio)) or "monkeysaudio" in str(type(audio)) or "optimfrog" in str(type(audio))):
+      return audio["Album"]
+   if ("flac" in str(type(audio))):
+      return audio["Album"]
+   
 #ONLY WORKS IF M4A
 def get_artist(path):
    audio = mutagen.File(path, None, True)
    if ("mp4" in str(type(audio))):
       return audio["\xa9ART"][0]
-   if ("mp3" in str(type(audio))):
+   if ("mp3" in str(type(audio)) or "aiff" in str(type(audio)) or "trueaudio" in str(type(audio))):
       return audio["artist"][0]
+   if ("wavpack" in str(type(audio)) or "musepack" in str(type(audio)) or "apev2" in str(type(audio)) or "monkeysaudio" in str(type(audio)) or "optimfrog" in str(type(audio))):
+      return audio["Artist"]
+   if ("flac" in str(type(audio))):
+      return audio["Artist"]
    
 def change_meta(path):
    audio = mutagen.File(path, None, True)
@@ -45,7 +53,7 @@ def change_meta(path):
       audio["soal"].append(data[1])
       audio["sonm"].append(data[2])
       audio["\xa9nam"].append(data[2])
-   if ("mp3" in str(type(audio))):
+   elif ("mp3" in str(type(audio)) or "aiff" in str(type(audio)) or "trueaudio" in str(type(audio))):
       del audio["artist"][:]
       del audio["album"][:]
       del audio["title"][:]
@@ -54,7 +62,16 @@ def change_meta(path):
       audio["album"].append(data[1])
       audio["title"].append(data[2])
       audio["tracknumber"].append(data[3])
-   
+   elif ("wavpack" in str(type(audio)) or "musepack" in str(type(audio)) or "apev2" in str(type(audio)) or "monkeysaudio" in str(type(audio)) or "optimfrog" in str(type(audio))):
+      audio["Artist"] = data[0]
+      audio["Album"] = data[1]
+      audio["Title"] = data[2]
+      audio["Track"] = data[3]
+   elif ("flac" in str(type(audio))):
+      audio["Artist"] = data[0]
+      audio["Album"] = data[1]
+      audio["Title"] = data[2]
+      audio["Track"] = data[3]
    audio.save()
    name = data[3] + ' ' + data[2] + os.path.splitext(path)[1]
    os.rename(path,os.path.join(os.path.dirname(path),name))
