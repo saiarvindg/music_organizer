@@ -6,19 +6,23 @@ path = 'C:\\Users\\Solomon Kritz\\Desktop\\Music'
 
 #ONLY WORKS IF M4A
 def get_album(path):
-   audio = mutagen.File(path)
+   audio = mutagen.File(path, None, True)
    print(audio.pprint())
    if ("mp4" in str(type(audio))):
       return audio["\xa9alb"][0]
+   if ("mp3" in str(type(audio))):
+      return audio["album"][0]
 
 #ONLY WORKS IF M4A
 def get_artist(path):
-   audio = mutagen.File(path)
+   audio = mutagen.File(path, None, True)
    if ("mp4" in str(type(audio))):
       return audio["\xa9ART"][0]
+   if ("mp3" in str(type(audio))):
+      return audio["artist"][0]
    
 def change_meta(path):
-   audio = mutagen.File(path)
+   audio = mutagen.File(path, None, True)
    data = get_meta(path)
    if ("mp4" in str(type(audio))):
       #artist
@@ -42,7 +46,15 @@ def change_meta(path):
       audio["sonm"].append(data[2])
       audio["\xa9nam"].append(data[2])
    if ("mp3" in str(type(audio))):
-      
+      del audio["artist"][:]
+      del audio["album"][:]
+      del audio["title"][:]
+      del audio["tracknumber"][:]
+      audio["artist"].append(data[0])
+      audio["album"].append(data[1])
+      audio["title"].append(data[2])
+      audio["tracknumber"].append(data[3])
+   
    audio.save()
    name = data[3] + ' ' + data[2] + os.path.splitext(path)[1]
    os.rename(path,os.path.join(os.path.dirname(path),name))
