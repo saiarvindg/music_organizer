@@ -1,4 +1,11 @@
 import eyed3
+import requests
+import json
+import acoustid
+from acoustid import match
+data = match("MZMS6Rw8O0", "MoralOfTheStory.mp3")
+
+
 
 def clear_meta_MP3(file):
 	audiofile = eyed3.load(file)
@@ -26,4 +33,16 @@ def clear_meta_MP3(file, artist, album, album_artist, title, track_num):
 	
 def change_meta_MP3(file):
 	print("change_meta > " + file)
+	pass
+	
+def return_meta(id):
+	urlhead = "http://musicbrainz.org/ws/2/release/"
+	urltail = "?inc=artist-credits&fmt=json"
+
+	return [json['title'], json['artist-credit'][0]['name'], "album", "track_num"]
+	pass
+	
+	
+def find_id(file):
+
 	pass

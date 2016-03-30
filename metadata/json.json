@@ -1,0 +1,42 @@
+{
+	"aliases":
+	[
+		{
+			"sort-name":"Nirvana US",
+			"type":null,
+			"name":"Nirvana US",
+			"locale":null,
+			"primary":null
+		}
+	],
+	"id":"5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+	"country":"US",
+	"sort-name":"Nirvana",
+	"name":"Nirvana",
+	"gender":null,
+	"begin_area":
+	{
+		"id":"a640b45c-c173-49b1-8030-973603e895b5",
+		"name":"Aberdeen",
+		"disambiguation":"",
+		"sort-name":"Aberdeen"
+	},
+	"ipis":[],
+	"area":
+	{
+		"sort-name":"United States",
+		"disambiguation":"",
+		"name":"United States",
+		"id":"489ce91b-6658-3307-9877-795b68554c98",
+		"iso-3166-1-codes":["US"]
+	},
+	"end_area":null,
+	"life-span":
+	{
+		"ended":true,
+		"begin":"1988-01",
+		"end":"1994-04-05"
+	},
+	"disambiguation":"90s US grunge band",
+	"type":"Group"
+}
