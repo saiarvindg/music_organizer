@@ -9,7 +9,7 @@ def get_album(path):
    audio = mutagen.File(path, None, True)
    print(audio.pprint())
    if ("mp4" in str(type(audio))):
-      return audio["\xa9alb"][0]
+      return audio["album"][0]
    if ("mp3" in str(type(audio)) or "aiff" in str(type(audio)) or "trueaudio" in str(type(audio))):
       return audio["album"][0]
    if ("wavpack" in str(type(audio)) or "musepack" in str(type(audio)) or "apev2" in str(type(audio)) or "monkeysaudio" in str(type(audio)) or "optimfrog" in str(type(audio))):
@@ -21,7 +21,7 @@ def get_album(path):
 def get_artist(path):
    audio = mutagen.File(path, None, True)
    if ("mp4" in str(type(audio))):
-      return audio["\xa9ART"][0]
+      return audio["artist"][0]
    if ("mp3" in str(type(audio)) or "aiff" in str(type(audio)) or "trueaudio" in str(type(audio))):
       return audio["artist"][0]
    if ("wavpack" in str(type(audio)) or "musepack" in str(type(audio)) or "apev2" in str(type(audio)) or "monkeysaudio" in str(type(audio)) or "optimfrog" in str(type(audio))):
@@ -33,31 +33,36 @@ def change_meta(path):
    audio = mutagen.File(path, None, True)
    data = get_meta(path)
    if ("mp4" in str(type(audio))):
-      #artist
-      del audio["\xa9ART"][:]
-      #album artist
-      del audio["aART"][:]
-      #artist sort order
-      del audio["soar"][:]
-      #album
-      del audio["\xa9alb"][:]
-      #album  order
-      del audio["soal"][:]
-      #title sort order
-      del audio["sonm"][:]
-      del audio["\xa9nam"][:]
-      audio["\xa9ART"].append(data[0])
-      audio["aART"].append(data[0])
-      audio["soar"].append(data[0])
-      audio["\xa9alb"].append(data[1])
-      audio["soal"].append(data[1])
-      audio["sonm"].append(data[2])
-      audio["\xa9nam"].append(data[2])
+      if ("albumartist" in audio.keys()):
+         del audio["albumartist"][:]
+      if ("artist" in audio.keys()):
+         del audio["artist"][:]
+      if ("artistsort" in audio.keys()):
+         del audio["artistsort"][:]
+      if ("albumsort" in audio.keys()):
+         del audio["albumsort"][:]
+      if ("album" in audio.keys()):
+         del audio["album"][:]
+      if ("titlesort" in audio.keys()):
+         del audio["titlesort"][:]
+      if ("title" in audio.keys()):
+         del audio["title"][:]
+      audio["albumartist"].append(data[0])
+      audio["artist"].append(data[0])
+      audio["artistsort"].append(data[0])
+      audio["albumsort"].append(data[1])
+      audio["album"].append(data[1])
+      audio["titlesort"].append(data[2])
+      audio["title"].append(data[2])
    elif ("mp3" in str(type(audio)) or "aiff" in str(type(audio)) or "trueaudio" in str(type(audio))):
-      del audio["artist"][:]
-      del audio["album"][:]
-      del audio["title"][:]
-      del audio["tracknumber"][:]
+      if ("artist" in audio.keys()):
+         del audio["artist"][:]
+      if ("album" in audio.keys()):
+         del audio["album"][:]
+      if ("title" in audio.keys()):
+         del audio["title"][:]
+      if ("tracknumber" in audio.keys()):
+         del audio["tracknumber"][:]
       audio["artist"].append(data[0])
       audio["album"].append(data[1])
       audio["title"].append(data[2])
