@@ -1,19 +1,53 @@
 import os
 import mutagen
-from metadata import clear_meta, change_meta
+#from metadata import clear_meta, change_meta
 
-path = 'C:\\Users\\Solomon Kritz\\Desktop\\Wiz Khalifa'
+path = 'C:\\Users\\Solomon Kritz\\Desktop\\Music'
 
 #ONLY WORKS IF M4A
 def get_album(path):
    audio = mutagen.File(path)
-   return(audio["\xa9ART"][0])
+   print(audio.pprint())
+   if ("mp4" in str(type(audio))):
+      return audio["\xa9alb"][0]
 
 #ONLY WORKS IF M4A
 def get_artist(path):
    audio = mutagen.File(path)
-   return audio["\xa9alb"][0]
-
+   if ("mp4" in str(type(audio))):
+      return audio["\xa9ART"][0]
+   
+def change_meta(path):
+   audio = mutagen.File(path)
+   data = get_meta(path)
+   if ("mp4" in str(type(audio))):
+      #artist
+      del audio["\xa9ART"][:]
+      #album artist
+      del audio["aART"][:]
+      #artist sort order
+      del audio["soar"][:]
+      #album
+      del audio["\xa9alb"][:]
+      #album  order
+      del audio["soal"][:]
+      #title sort order
+      del audio["sonm"][:]
+      del audio["\xa9nam"][:]
+      audio["\xa9ART"].append(data[0])
+      audio["aART"].append(data[0])
+      audio["soar"].append(data[0])
+      audio["\xa9alb"].append(data[1])
+      audio["soal"].append(data[1])
+      audio["sonm"].append(data[2])
+      audio["\xa9nam"].append(data[2])
+   if ("mp3" in str(type(audio))):
+      
+   audio.save()
+   name = data[3] + ' ' + data[2] + os.path.splitext(path)[1]
+   os.rename(path,os.path.join(os.path.dirname(path),name))
+   return os.path.join(os.path.dirname(path),name)
+   
 def collapse():
    recreate(path, path)
 
@@ -58,7 +92,7 @@ def recreate(path, root):
       if os.path.isdir(filePath):
          recreate(filePath, root)
       elif isMusicFile(filePath):
-         #change_meta()
+         filePath = change_meta(filePath)
          moveToCorrectLocation(filePath, root)
       else:
          os.remove(filePath)
