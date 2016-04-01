@@ -1,48 +1,14 @@
-import eyed3
 import requests
 import json
-import acoustid
-from acoustid import match
-data = match("MZMS6Rw8O0", "MoralOfTheStory.mp3")
 
+def return_meta(mbid):
+	urlhead = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=a0a2dc22c307a2dd5b69051883706a65&mbid="
+	urltail = "&format=json"
 
-
-def clear_meta_MP3(file):
-	audiofile = eyed3.load(file)
-	audiofile.tag.artist = u""
-	audiofile.tag.album = u""
-	audiofile.tag.album_artist = u""
-	audiofile.tag.title = u""
-	audiofile.tag.track_num = 0
-
-	audiofile.tag.save()
-	print("clear_meta > " + file)
-	pass
-
-def clear_meta_MP3(file, artist, album, album_artist, title, track_num):
-	audiofile = eyed3.load(file)
-	audiofile.tag.artist = artist
-	audiofile.tag.album = album
-	audiofile.tag.album_artist = album_artist
-	audiofile.tag.title = title
-	audiofile.tag.track_num = track_num
-
-	audiofile.tag.save()
-	print("Updated MP3 Tags > " + file)
-	pass	
+	json = (requests.get(urlhead + mbid + urltail)).json()
 	
-def change_meta_MP3(file):
-	print("change_meta > " + file)
-	pass
-	
-def return_meta(id):
-	urlhead = "http://musicbrainz.org/ws/2/release/"
-	urltail = "?inc=artist-credits&fmt=json"
-
-	return [json['title'], json['artist-credit'][0]['name'], "album", "track_num"]
-	pass
-	
-	
-def find_id(file):
-
+	if json.get('error'):
+		return [None, None, None, None]
+	else:
+		return [json['track']['name'],json['track']['artist']['name'],json['track']['album']['title'],json['track']['album']['@attr']['position']]
 	pass
