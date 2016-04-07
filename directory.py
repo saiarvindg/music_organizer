@@ -2,7 +2,7 @@ import os
 import mutagen
 from metadata import return_meta
 
-path = 'C:\\Users\\Solomon Kritz\\Desktop\\Music'
+path = "C:\\Users\\Solomon Kritz\\Desktop\Music\\ScHoolboy Q\\Oxymoron"
 COUNTER = 0
 def get_album(path):
    audio = mutagen.File(path, None, True)
@@ -200,10 +200,22 @@ def change_meta(path):
       name = data[3] + ' ' + data[2] + os.path.splitext(path)[1]
       try:
          os.rename(path,os.path.join(os.path.dirname(path),name))
+         return os.path.join(os.path.dirname(path),name)
       except:
-         os.rename(path,os.path.join(os.path.dirname(path),name)+str(COUNTER))
+         name = data[3] + ' ' + data[2] +str(COUNTER) + os.path.splitext(path)[1]
+         os.rename(path,os.path.join(os.path.dirname(path),name))
          COUNTER=COUNTER+1
-      return os.path.join(os.path.dirname(path),name)
+         return os.path.join(os.path.dirname(path),name)
+   elif (data[2] is not None):
+      name = data[2] + os.path.splitext(path)[1]
+      try:
+         os.rename(path,os.path.join(os.path.dirname(path),name))
+         return os.path.join(os.path.dirname(path),name)
+      except:
+         name = data[3] + ' ' + data[2] +str(COUNTER) + os.path.splitext(path)[1]
+         os.rename(path,os.path.join(os.path.dirname(path),name))
+         COUNTER=COUNTER+1
+         return os.path.join(os.path.dirname(path),name)
    return path
    
 def collapse():
@@ -223,7 +235,7 @@ def goDown(path, oldPath):
          try:
             os.rename(filePath, os.path.join(oldPath, file))
          except:
-            os.rename(filePath, os.path.join(oldPath, file)+str(COUNTER))
+            os.rename(filePath, os.path.join(oldPath, os.path.splitext(file)[0]+str(COUNTER)+os.path.splitext(file)[1]))
             COUNTER=COUNTER+1
             
 def isMusicFile(filePath):
@@ -273,7 +285,10 @@ def moveToCorrectLocation(filePath, root):
     #folders and joining the path 
     else:
         dest = os.path.join(root, get_artist(filePath))
-        os.mkdir(dest)
+        try:
+            os.mkdir(dest)
+        except:
+            return
     
     #if the album already exists then we are just joining the paths
     if (os.path.exists(os.path.join(dest, get_album(filePath)))):
@@ -282,13 +297,16 @@ def moveToCorrectLocation(filePath, root):
     #folders and joining the path
     else:
         dest = os.path.join(dest, get_album(filePath))
-        os.mkdir(dest)
+        try:
+            os.mkdir(dest)
+        except:
+            return
         
     if (filePath != dest):
         try:
             os.rename(filePath, os.path.join(dest,os.path.basename(filePath)))
         except:
-            os.rename(filePath, os.path.join(dest,os.path.basename(filePath))+str(COUNTER))
+            os.rename(filePath, os.path.join(dest, os.path.splitext(os.path.basename(filePath))[0]+str(COUNTER)+os.path.splitext(os.path.basename(filePath))[1]))
             COUNTER=COUNTER+1
 
 if __name__ == "__main__":

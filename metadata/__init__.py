@@ -4,12 +4,16 @@ import acoustid
 
 def return_meta(path):
         mbid = None
+        title = None
         info=list(acoustid.match('MZMS6Rw8O0', path))
         if ((len(info) != 0) and (len(info[0]) != 0)):
                 mbid=info[0][1]
                 title=info[0][2]
                 artist=info[0][3]
-        print(title)
+        if (title is None):
+                print("None, " + path)
+        else:
+                print(title)
         album = None
         position = None
         urlhead = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=a0a2dc22c307a2dd5b69051883706a65&mbid="
