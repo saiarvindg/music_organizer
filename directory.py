@@ -2,7 +2,7 @@ import os
 import mutagen
 from metadata import return_meta
 
-path = "C:\\Users\\Solomon Kritz\\Desktop\Music\\ScHoolboy Q\\Oxymoron"
+path = "C:\\Users\\Solomon Kritz\\Desktop\\Wiz Khalifa\\O.N.I.F.C. (Deluxe Version)"
 COUNTER = 0
 def get_album(path):
    audio = mutagen.File(path, None, True)
@@ -31,89 +31,110 @@ def change_meta(path):
    data = return_meta(path)
    global COUNTER
    if (data[0] is not None):
-      data[0]=data[0].replace(":", "")
-      data[0]=data[0].replace("/", "")
-      data[0]=data[0].replace("\\", "")
-      data[0]=data[0].replace("?", "")
-      data[0]=data[0].replace("*", "")
-      data[0]=data[0].replace(">", "")
-      data[0]=data[0].replace("<", "")
-      data[0]=data[0].replace("|", "")
-      data[0]=data[0].replace("\"", "")
+      data[0]=data[0].replace(":", "-")
+      data[0]=data[0].replace("/", "-")
+      data[0]=data[0].replace("\\", "-")
+      data[0]=data[0].replace("?", "-")
+      data[0]=data[0].replace("*", "-")
+      data[0]=data[0].replace(">", "-")
+      data[0]=data[0].replace("<", "-")
+      data[0]=data[0].replace("|", "-")
+      data[0]=data[0].replace("\"", "-")
       i=data[0].find(";")
       if (i != -1):
          data[0]=data[0][:i]
    if (data[1] is not None):
-      data[1]=data[1].replace(":", "")
-      data[1]=data[1].replace("/", "")
-      data[1]=data[1].replace("\\", "")
-      data[1]=data[1].replace("?", "")
-      data[1]=data[1].replace("*", "")
-      data[1]=data[1].replace(">", "")
-      data[1]=data[1].replace("<", "")
-      data[1]=data[1].replace("|", "")
-      data[1]=data[1].replace("\"", "")
+      data[1]=data[1].replace(":", "-")
+      data[1]=data[1].replace("/", "-")
+      data[1]=data[1].replace("\\", "-")
+      data[1]=data[1].replace("?", "-")
+      data[1]=data[1].replace("*", "-")
+      data[1]=data[1].replace(">", "-")
+      data[1]=data[1].replace("<", "-")
+      data[1]=data[1].replace("|", "-")
+      data[1]=data[1].replace("\"", "-")
    if (data[2] is not None):
-      data[2]=data[2].replace(":", "")
-      data[2]=data[2].replace("/", "")
-      data[2]=data[2].replace("\\", "")
-      data[2]=data[2].replace("?", "")
-      data[2]=data[2].replace("*", "")
-      data[2]=data[2].replace(">", "")
-      data[2]=data[2].replace("<", "")
-      data[2]=data[2].replace("|", "")
-      data[2]=data[2].replace("\"", "")
+      data[2]=data[2].replace(":", "-")
+      data[2]=data[2].replace("/", "-")
+      data[2]=data[2].replace("\\", "-")
+      data[2]=data[2].replace("?", "-")
+      data[2]=data[2].replace("*", "-")
+      data[2]=data[2].replace(">", "-")
+      data[2]=data[2].replace("<", "-")
+      data[2]=data[2].replace("|", "-")
+      data[2]=data[2].replace("\"", "-")
    if (data[3] is not None):
-      data[3]=data[3].replace(":", "")
-      data[3]=data[3].replace("/", "")
-      data[3]=data[3].replace("\\", "")
-      data[3]=data[3].replace("?", "")
-      data[3]=data[3].replace("*", "")
-      data[3]=data[3].replace(">", "")
-      data[3]=data[3].replace("<", "")
-      data[3]=data[3].replace("|", "")
-      data[3]=data[3].replace("\"", "")
+      data[3]=data[3].replace(":", "-")
+      data[3]=data[3].replace("/", "-")
+      data[3]=data[3].replace("\\", "-")
+      data[3]=data[3].replace("?", "-")
+      data[3]=data[3].replace("*", "-")
+      data[3]=data[3].replace(">", "-")
+      data[3]=data[3].replace("<", "-")
+      data[3]=data[3].replace("|", "-")
+      data[3]=data[3].replace("\"", "-")
       if (len(data[3]) == 1):
           data[3] = '0'+data[3]
    if ("mp4" in str(type(audio))):
       if ((data[0] is None) and (("albumartist" in audio.keys()) and (len(audio["albumartist"]) == 0))):
          audio["albumartist"].append("UnknownArtist")
+      elif ((data[0] is None) and ("albumartist" not in audio.keys())):
+         audio["albumartist"] = []
+         audio["albumartist"].append("UnknownArtist")
       elif ((data[0] is not None) and ("albumartist" in audio.keys())):
          del audio["albumartist"][:]
          audio["albumartist"].append(data[0])
       elif (data[0] is not None):
+         audio["albumartist"] = []
          audio["albumartist"].append(data[0])
          
       if ((data[0] is None) and (("artist" in audio.keys()) and (len(audio["artist"]) == 0))):
          audio["artist"].append("UnknownArtist")
+      elif ((data[0] is None) and ("artist" not in audio.keys())):
+         audio["artist"] = []
+         audio["artist"].append("UnknownArtist")
       elif ((data[0] is not None) and ("artist" in audio.keys())):
          del audio["artist"][:]
          audio["artist"].append(data[0])
+         print(audio["artist"][0])
       elif (data[0] is not None):
+         audio["artist"] = []
          audio["artist"].append(data[0])
          
       if ((data[0] is None) and (("artistsort" in audio.keys()) and (len(audio["artistsort"]) == 0))):
+         audio["artistsort"].append("UnknownArtist")
+      elif ((data[0] is None) and ("artistsort" not in audio.keys())):
+         audio["artistsort"] = []
          audio["artistsort"].append("UnknownArtist")
       elif ((data[0] is not None) and ("artistsort" in audio.keys())):
          del audio["artistsort"][:]
          audio["artistsort"].append(data[0])
       elif (data[0] is not None):
+         audio["artistsort"] = []
          audio["artistsort"].append(data[0])
          
       if ((data[1] is None) and (("albumsort" in audio.keys()) and (len(audio["albumsort"]) == 0))):
+         audio["albumsort"].append("UnknownAlbum")
+      elif ((data[1] is None) and ("albumsort" not in audio.keys())):
+         audio["albumsort"] = []
          audio["albumsort"].append("UnknownAlbum")
       elif ((data[1] is not None) and ("albumsort" in audio.keys())):
          del audio["albumsort"][:]
          audio["albumsort"].append(data[1])
       elif (data[1] is not None):
+         audio["albumsort"] = []
          audio["albumsort"].append(data[1])
          
       if ((data[1] is None) and (("album" in audio.keys()) and (len(audio["album"]) == 0))):
+         audio["album"].append("UnknownAlbum")
+      elif ((data[1] is None) and ("album" not in audio.keys())):
+         audio["album"] = []
          audio["album"].append("UnknownAlbum")
       elif ((data[1] is not None) and ("album" in audio.keys())):
          del audio["album"][:]
          audio["album"].append(data[1])
       elif (data[1] is not None):
+         audio["album"] = []
          audio["album"].append(data[1])
          
       if ((data[2] is None) and (("titlesort" in audio.keys()) and (len(audio["titlesort"]) == 0))):
@@ -123,6 +144,7 @@ def change_meta(path):
          del audio["titlesort"][:]
          audio["titlesort"].append(data[2])
       elif (data[2] is not None):
+         audio["titlesort"] = []
          audio["titlesort"].append(data[2])
          
       if ((data[2] is None) and (("title" in audio.keys()) and (len(audio["title"]) == 0))):
@@ -132,23 +154,42 @@ def change_meta(path):
          del audio["title"][:]
          audio["title"].append(data[2])
       elif (data[2] is not None):
+         audio["title"] = []
          audio["title"].append(data[2])
+         
+      if ((data[3] is None) and (("tracknumber" in audio.keys()) and (len(audio["tracknumber"]) == 0))):
+         #audio["title"].append("Unknown")
+         pass
+      elif ((data[3] is not None) and ("tracknumber" in audio.keys())):
+         del audio["tracknumber"][:]
+         audio["tracknumber"].append(data[3])
+      elif (data[3] is not None):
+         audio["tracknumber"] = []
+         audio["tracknumber"].append(data[3])
          
    elif ("mp3" in str(type(audio)) or "aiff" in str(type(audio)) or "trueaudio" in str(type(audio))):
       if ((data[0] is None) and (("artist" in audio.keys()) and (len(audio["artist"]) == 0))):
+         audio["artist"].append("UnknownArtist")
+      elif ((data[0] is None) and ("artist" not in audio.keys())):
+         audio["artist"] = []
          audio["artist"].append("UnknownArtist")
       elif ((data[0] is not None) and ("artist" in audio.keys())):
          del audio["artist"][:]
          audio["artist"].append(data[0])
       elif (data[0] is not None):
+         audio["artist"] = []
          audio["artist"].append(data[0])
          
       if ((data[1] is None) and (("album" in audio.keys()) and (len(audio["album"]) == 0))):
+         audio["album"].append("UnknownAlbum")
+      elif ((data[1] is None) and ("album" not in audio.keys())):
+         audio["album"] = []
          audio["album"].append("UnknownAlbum")
       elif ((data[1] is not None) and ("album" in audio.keys())):
          del audio["album"][:]
          audio["album"].append(data[1])
       elif (data[1] is not None):
+         audio["album"] = []
          audio["album"].append(data[1])
          
       if ((data[2] is None) and (("title" in audio.keys()) and (len(audio["title"]) == 0))):
@@ -158,6 +199,7 @@ def change_meta(path):
          del audio["title"][:]
          audio["title"].append(data[2])
       elif (data[2] is not None):
+         audio["title"] = []
          audio["title"].append(data[2])
          
       if ((data[3] is None) and (("tracknumber" in audio.keys()) and (len(audio["tracknumber"]) == 0))):
@@ -167,6 +209,7 @@ def change_meta(path):
          del audio["tracknumber"][:]
          audio["tracknumber"].append(data[2])
       elif (data[3] is not None):
+         audio["tracknumber"] = []
          audio["tracknumber"].append(data[2])
 
    elif ("wavpack" in str(type(audio)) or "musepack" in str(type(audio)) or "apev2" in str(type(audio)) or "monkeysaudio" in str(type(audio)) or "optimfrog" in str(type(audio))):
@@ -212,7 +255,7 @@ def change_meta(path):
          os.rename(path,os.path.join(os.path.dirname(path),name))
          return os.path.join(os.path.dirname(path),name)
       except:
-         name = data[3] + ' ' + data[2] +str(COUNTER) + os.path.splitext(path)[1]
+         name = data[2] + str(COUNTER) + os.path.splitext(path)[1]
          os.rename(path,os.path.join(os.path.dirname(path),name))
          COUNTER=COUNTER+1
          return os.path.join(os.path.dirname(path),name)
