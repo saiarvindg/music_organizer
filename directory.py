@@ -2,7 +2,7 @@ import os
 import mutagen
 from metadata import return_meta
 
-path = "C:\\Users\\Solomon Kritz\\Desktop\\Wiz Khalifa\\O.N.I.F.C. (Deluxe Version)"
+path = "C:\\Users\\Solomon Kritz\\Desktop\\Music"
 COUNTER = 0
 def get_album(path):
    audio = mutagen.File(path, None, True)
@@ -76,141 +76,76 @@ def change_meta(path):
       if (len(data[3]) == 1):
           data[3] = '0'+data[3]
    if ("mp4" in str(type(audio))):
-      if ((data[0] is None) and (("albumartist" in audio.keys()) and (len(audio["albumartist"]) == 0))):
-         audio["albumartist"].append("UnknownArtist")
-      elif ((data[0] is None) and ("albumartist" not in audio.keys())):
+      if (data[0] is None):
          audio["albumartist"] = []
-         audio["albumartist"].append("UnknownArtist")
-      elif ((data[0] is not None) and ("albumartist" in audio.keys())):
-         del audio["albumartist"][:]
-         audio["albumartist"].append(data[0])
+         audio["albumartist"] = "UnknownArtist"
       elif (data[0] is not None):
          audio["albumartist"] = []
-         audio["albumartist"].append(data[0])
+         audio["albumartist"] = data[0]
          
-      if ((data[0] is None) and (("artist" in audio.keys()) and (len(audio["artist"]) == 0))):
-         audio["artist"].append("UnknownArtist")
-      elif ((data[0] is None) and ("artist" not in audio.keys())):
+      if (data[0] is None):
          audio["artist"] = []
-         audio["artist"].append("UnknownArtist")
-      elif ((data[0] is not None) and ("artist" in audio.keys())):
-         del audio["artist"][:]
-         audio["artist"].append(data[0])
-         print(audio["artist"][0])
+         audio["artist"] = "UnknownArtist"
       elif (data[0] is not None):
          audio["artist"] = []
-         audio["artist"].append(data[0])
+         audio["artist"] = data[0]
          
-      if ((data[0] is None) and (("artistsort" in audio.keys()) and (len(audio["artistsort"]) == 0))):
-         audio["artistsort"].append("UnknownArtist")
-      elif ((data[0] is None) and ("artistsort" not in audio.keys())):
+      if (data[0] is None):
          audio["artistsort"] = []
-         audio["artistsort"].append("UnknownArtist")
-      elif ((data[0] is not None) and ("artistsort" in audio.keys())):
-         del audio["artistsort"][:]
-         audio["artistsort"].append(data[0])
+         audio["artistsort"] = "UnknownArtist"
       elif (data[0] is not None):
          audio["artistsort"] = []
-         audio["artistsort"].append(data[0])
+         audio["artistsort"] = data[0]
          
-      if ((data[1] is None) and (("albumsort" in audio.keys()) and (len(audio["albumsort"]) == 0))):
-         audio["albumsort"].append("UnknownAlbum")
-      elif ((data[1] is None) and ("albumsort" not in audio.keys())):
+      if (data[1] is None):
          audio["albumsort"] = []
-         audio["albumsort"].append("UnknownAlbum")
-      elif ((data[1] is not None) and ("albumsort" in audio.keys())):
-         del audio["albumsort"][:]
-         audio["albumsort"].append(data[1])
+         audio["albumsort"] = "UnknownAlbum"
       elif (data[1] is not None):
          audio["albumsort"] = []
-         audio["albumsort"].append(data[1])
+         audio["albumsort"] = data[1]
          
-      if ((data[1] is None) and (("album" in audio.keys()) and (len(audio["album"]) == 0))):
-         audio["album"].append("UnknownAlbum")
-      elif ((data[1] is None) and ("album" not in audio.keys())):
+      if (data[1] is None):
          audio["album"] = []
-         audio["album"].append("UnknownAlbum")
-      elif ((data[1] is not None) and ("album" in audio.keys())):
-         del audio["album"][:]
-         audio["album"].append(data[1])
+         audio["album"] = "UnknownAlbum"
       elif (data[1] is not None):
          audio["album"] = []
-         audio["album"].append(data[1])
+         audio["album"] = data[1]
          
-      if ((data[2] is None) and (("titlesort" in audio.keys()) and (len(audio["titlesort"]) == 0))):
-         #audio["titlesort"].append("Unknown")
-         pass
-      elif ((data[2] is not None) and ("titlesort" in audio.keys())):
-         del audio["titlesort"][:]
-         audio["titlesort"].append(data[2])
-      elif (data[2] is not None):
+      if (data[2] is not None):
          audio["titlesort"] = []
-         audio["titlesort"].append(data[2])
+         audio["titlesort"] = data[2]
          
-      if ((data[2] is None) and (("title" in audio.keys()) and (len(audio["title"]) == 0))):
-         #audio["title"].append("Unknown")
-         pass
-      elif ((data[2] is not None) and ("title" in audio.keys())):
-         del audio["title"][:]
-         audio["title"].append(data[2])
-      elif (data[2] is not None):
+      if (data[2] is not None):
          audio["title"] = []
-         audio["title"].append(data[2])
-         
-      if ((data[3] is None) and (("tracknumber" in audio.keys()) and (len(audio["tracknumber"]) == 0))):
-         #audio["title"].append("Unknown")
-         pass
-      elif ((data[3] is not None) and ("tracknumber" in audio.keys())):
-         del audio["tracknumber"][:]
-         audio["tracknumber"].append(data[3])
-      elif (data[3] is not None):
+         audio["title"] = data[2]
+
+      if (data[3] is not None):
          audio["tracknumber"] = []
-         audio["tracknumber"].append(data[3])
+         audio["tracknumber"] = data[3]
          
+#MP3         
    elif ("mp3" in str(type(audio)) or "aiff" in str(type(audio)) or "trueaudio" in str(type(audio))):
-      if ((data[0] is None) and (("artist" in audio.keys()) and (len(audio["artist"]) == 0))):
-         audio["artist"].append("UnknownArtist")
-      elif ((data[0] is None) and ("artist" not in audio.keys())):
+      if (data[0] is None):
          audio["artist"] = []
-         audio["artist"].append("UnknownArtist")
-      elif ((data[0] is not None) and ("artist" in audio.keys())):
-         del audio["artist"][:]
-         audio["artist"].append(data[0])
+         audio["artist"] = "UnknownArtist"
       elif (data[0] is not None):
          audio["artist"] = []
-         audio["artist"].append(data[0])
+         audio["artist"] = data[0]
          
-      if ((data[1] is None) and (("album" in audio.keys()) and (len(audio["album"]) == 0))):
-         audio["album"].append("UnknownAlbum")
-      elif ((data[1] is None) and ("album" not in audio.keys())):
+      if (data[1] is None):
          audio["album"] = []
-         audio["album"].append("UnknownAlbum")
-      elif ((data[1] is not None) and ("album" in audio.keys())):
-         del audio["album"][:]
-         audio["album"].append(data[1])
+         audio["album"] = "UnknownAlbum"
       elif (data[1] is not None):
          audio["album"] = []
-         audio["album"].append(data[1])
+         audio["album"] = data[1]
          
-      if ((data[2] is None) and (("title" in audio.keys()) and (len(audio["title"]) == 0))):
-         #audio["title"].append("Unknown")
-         pass
-      elif ((data[2] is not None) and ("title" in audio.keys())):
-         del audio["title"][:]
-         audio["title"].append(data[2])
-      elif (data[2] is not None):
+      if (data[2] is not None):
          audio["title"] = []
-         audio["title"].append(data[2])
-         
-      if ((data[3] is None) and (("tracknumber" in audio.keys()) and (len(audio["tracknumber"]) == 0))):
-         #audio["title"].append("Unknown")
-         pass
-      elif ((data[3] is not None) and ("tracknumber" in audio.keys())):
-         del audio["tracknumber"][:]
-         audio["tracknumber"].append(data[2])
-      elif (data[3] is not None):
+         audio["title"] = data[2]
+
+      if (data[3] is not None):
          audio["tracknumber"] = []
-         audio["tracknumber"].append(data[2])
+         audio["tracknumber"] = data[3]
 
    elif ("wavpack" in str(type(audio)) or "musepack" in str(type(audio)) or "apev2" in str(type(audio)) or "monkeysaudio" in str(type(audio)) or "optimfrog" in str(type(audio))):
       if ((data[0] is None) and (("Artist" not in audio.keys()) or ("artist" not in audio.keys()))):

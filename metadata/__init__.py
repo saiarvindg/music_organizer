@@ -10,10 +10,6 @@ def return_meta(path):
                 mbid=info[0][1]
                 title=info[0][2]
                 artist=info[0][3]
-        if (title is None):
-                print("None, " + path)
-        else:
-                print(title)
         album = None
         position = None
         urlhead = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=a0a2dc22c307a2dd5b69051883706a65&mbid="
