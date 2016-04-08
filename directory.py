@@ -249,7 +249,7 @@ def recreate(path, root):
          moveToCorrectLocation(filePath, root)
       else:
          os.remove(filePath)
-   if dirEmpty(path):
+   if (dirEmpty(path) and path != root):
       os.rmdir(path)
 
 
