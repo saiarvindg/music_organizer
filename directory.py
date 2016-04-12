@@ -2,7 +2,6 @@ import os
 import mutagen
 from metadata import return_meta
 
-path = "C:\\Users\\Solomon Kritz\\Desktop\\Music"
 COUNTER = 0
 def get_album(path):
    audio = mutagen.File(path, None, True)
@@ -196,7 +195,7 @@ def change_meta(path):
          return os.path.join(os.path.dirname(path),name)
    return path
    
-def collapse():
+def collapse(path):
    recreate(path, path)
 
 def goDown(path, oldPath):
@@ -288,4 +287,5 @@ def moveToCorrectLocation(filePath, root):
             COUNTER=COUNTER+1
 
 if __name__ == "__main__":
-    collapse()
+    path = input("Enter the path of the directory you'd like to organize: ")
+    collapse(path)
