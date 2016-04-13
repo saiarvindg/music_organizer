@@ -24,10 +24,11 @@ http://beets.readthedocs.org/en/latest/plugins/chroma.html
 3. Give the script the full path to the directory you'd like to organize when prompted
 4. Wait while the music is sorted
   * If you chose to install the fpcalc command line tool, do not be suprised to see the terminal or command prompt opening and closing repeatedly at this point
+
 ##Acknowledgments
 ####Authors
-Sai Arvind Ganganapelle
-Solomon Kritz
-Aleksey Bychkov
+Sai Arvind Ganganapelle  
+Solomon Kritz  
+Aleksey Bychkov  
 ####Mentors
 Ramsey Khadder
