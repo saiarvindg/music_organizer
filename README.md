@@ -26,6 +26,7 @@ http://beets.readthedocs.org/en/latest/plugins/chroma.html
 4. Wait while the music is sorted
   * If you chose to install the fpcalc command line tool, do not be suprised to see the terminal or command prompt opening and closing repeatedly at this point
 
+![A gif of the tool being used should appear here.](./.morganizer.gif)
 
 ##Acknowledgments
 ####Authors
