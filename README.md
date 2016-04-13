@@ -15,6 +15,7 @@ If you have any of the following packages already, one should still run the comm
 ####Step 3: Applications
 Install either the ChromaPrint Dynamic Library OR the command line tool fpcalc. If you choose to install the command line tool fpcalc, be sure to add the tool to your PATH. Instructions on installation can be found below.  
 http://beets.readthedocs.org/en/latest/plugins/chroma.html
+
 ##Usage
 1. Move all the music you would like to sort into one directory  
   * Skip this step if all the music you'd like to sort is already in one place  
@@ -24,6 +25,7 @@ http://beets.readthedocs.org/en/latest/plugins/chroma.html
 3. Give the script the full path to the directory you'd like to organize when prompted
 4. Wait while the music is sorted
   * If you chose to install the fpcalc command line tool, do not be suprised to see the terminal or command prompt opening and closing repeatedly at this point
+
 
 ##Acknowledgments
 ####Authors
